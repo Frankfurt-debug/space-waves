@@ -3,7 +3,6 @@
   <head>
   <link rel="icon" type="image/x-icon" href="https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico">
   <title>Dashboard</title>
-     <base href="https://cdn.jsdelivr.net/gh/genizy/cg-rip@latest/space-waves/">
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -53,7 +52,7 @@
       const loadingText = document.getElementById("loading-text");
 
       for (const [file, _] of files) {
-        const merged = await mergeParts("Build/" + file);
+        const merged = await mergeParts("build/" + file);
         map[file] = merged;
         done++;
         const percent = Math.floor((done / total) * 100);
@@ -78,7 +77,8 @@
             return origFetch(mergedMap[key], options);
           }
           if (resource.includes("StreamingAssets")) {
-            return origFetch((document.querySelector('base').href !== null ? document.querySelector('base').href+"/" : "") + "StreamingAssets/"+resource.split("/StreamingAssets/")[1])
+            const base = document.querySelector('base');
+            return origFetch((base ? base.href + "/" : "") + "StreamingAssets/" + resource.split("/StreamingAssets/")[1])
           }
         }
         return origFetch(resource, options);
@@ -101,11 +101,11 @@
       };
 
       const canvas = document.querySelector("#unity-canvas");
-      const loaderUrl = "Build/81bbae32c7a77bc49304934b19e72883.loader.js";
+      const loaderUrl = "build/81bbae32c7a77bc49304934b19e72883.loader.js";
       const config = {
-        dataUrl: "Build/e4aa851098e3e5d328e4d879078ad6c5.data",
-        frameworkUrl: "Build/f3dc87e8bc321dd382fbd3fa53e1091f.framework.js",
-        codeUrl: "Build/9adf8a1aafea4c2333e26d66a8b36d56.wasm",
+        dataUrl: "build/e4aa851098e3e5d328e4d879078ad6c5.data",
+        frameworkUrl: "build/f3dc87e8bc321dd382fbd3fa53e1091f.framework.js",
+        codeUrl: "build/9adf8a1aafea4c2333e26d66a8b36d56.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Space Waves",
         productName: "Space Waves",
